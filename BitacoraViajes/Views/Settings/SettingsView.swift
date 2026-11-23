@@ -56,42 +56,6 @@ public struct SettingsView: View {
                     }
                 }
 
-                Section("Sincronización Opcional con Servidor Propio") {
-                    Toggle("Activar Servidor Fastify / Unraid", isOn: $viewModel.serverConfig.isEnabled)
-                        .onChange(of: viewModel.serverConfig.isEnabled) { _, _ in
-                            Task { await viewModel.saveServerConfig() }
-                        }
-
-                    if viewModel.serverConfig.isEnabled {
-                        TextField("URL Servidor (ej: https://api.tu-servidor.com)", text: $viewModel.serverConfig.serverURL)
-                            .textInputAutocapitalization(.never)
-                            .keyboardType(.URL)
-                            .onChange(of: viewModel.serverConfig.serverURL) { _, _ in
-                                Task { await viewModel.saveServerConfig() }
-                            }
-
-                        SecureField("PIN de Acceso / Token", text: $viewModel.serverConfig.apiPin)
-                            .onChange(of: viewModel.serverConfig.apiPin) { _, _ in
-                                Task { await viewModel.saveServerConfig() }
-                            }
-
-                        Button {
-                            Task { await viewModel.testServerConnection() }
-                        } label: {
-                            if viewModel.isTestingConnection {
-                                ProgressView()
-                            } else {
-                                Text("Probar Conexión con Servidor")
-                            }
-                        }
-
-                        if let message = viewModel.connectionTestMessage {
-                            Text(message)
-                                .font(.footnote)
-                        }
-                    }
-                }
-
                 Section("Acerca de Bitácora de Viajes") {
                     HStack {
                         Text("Versión")
@@ -110,6 +74,49 @@ public struct SettingsView: View {
                         Spacer()
                         Text("ProMotion 120Hz & Haptics")
                             .foregroundStyle(.secondary)
+                    }
+                }
+
+                Section {
+                    DisclosureGroup("Avanzado: Conectar a Servidor Propio") {
+                        Text("Bitácora de Viajes funciona 100% en local y sin servidores. Esta opción es exclusiva para usuarios avanzados que deseen sincronizar con su propia infraestructura Fastify / Docker.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .padding(.vertical, 4)
+
+                        Toggle("Activar Conexión Externa", isOn: $viewModel.serverConfig.isEnabled)
+                            .onChange(of: viewModel.serverConfig.isEnabled) { _, _ in
+                                Task { await viewModel.saveServerConfig() }
+                            }
+
+                        if viewModel.serverConfig.isEnabled {
+                            TextField("URL Servidor (ej: https://api.tu-servidor.com)", text: $viewModel.serverConfig.serverURL)
+                                .textInputAutocapitalization(.never)
+                                .keyboardType(.URL)
+                                .onChange(of: viewModel.serverConfig.serverURL) { _, _ in
+                                    Task { await viewModel.saveServerConfig() }
+                                }
+
+                            SecureField("PIN de Acceso / Token", text: $viewModel.serverConfig.apiPin)
+                                .onChange(of: viewModel.serverConfig.apiPin) { _, _ in
+                                    Task { await viewModel.saveServerConfig() }
+                                }
+
+                            Button {
+                                Task { await viewModel.testServerConnection() }
+                            } label: {
+                                if viewModel.isTestingConnection {
+                                    ProgressView()
+                                } else {
+                                    Text("Probar Conexión con Servidor")
+                                }
+                            }
+
+                            if let message = viewModel.connectionTestMessage {
+                                Text(message)
+                                    .font(.footnote)
+                            }
+                        }
                     }
                 }
             }

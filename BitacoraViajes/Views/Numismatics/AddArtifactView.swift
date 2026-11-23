@@ -12,7 +12,8 @@ public struct AddArtifactView: View {
 
     @State private var category: ArtifactCategory
     @State private var title: String = ""
-    @State private var countryCode: String = "ES"
+    @State private var selectedCountry: CountryInfo = CountryCatalog.find(code: "ES")
+    @State private var showingCountryPicker: Bool = false
     @State private var currencyCode: String = "EUR"
     @State private var denomination: String = "1"
     @State private var yearString: String = ""
@@ -30,7 +31,8 @@ public struct AddArtifactView: View {
         _category = State(initialValue: defaultCategory)
         if let trip = preselectedTrip {
             _selectedTripId = State(initialValue: trip.id)
-            _countryCode = State(initialValue: trip.countryCode)
+            _selectedCountry = State(initialValue: CountryCatalog.find(code: trip.countryCode))
+            _currencyCode = State(initialValue: CountryCatalog.find(code: trip.countryCode).defaultCurrency)
         }
     }
 
@@ -46,14 +48,19 @@ public struct AddArtifactView: View {
 
                     TextField("Título de la pieza o recuerdo", text: $title)
 
-                    HStack {
-                        Text("País de Origen")
-                        Spacer()
-                        TextField("ES", text: $countryCode)
-                            .multilineTextAlignment(.trailing)
-                            .textInputAutocapitalization(.characters)
-                            .frame(width: 80)
-                        CountryFlagView(countryCode: countryCode, fontSize: 16)
+                    Button {
+                        showingCountryPicker = true
+                    } label: {
+                        HStack {
+                            Text("País de Origen")
+                                .foregroundStyle(.primary)
+                            Spacer()
+                            Text("\(selectedCountry.flag) \(selectedCountry.name)")
+                                .foregroundStyle(.secondary)
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundStyle(.tertiary)
+                        }
                     }
 
                     if !availableTrips.isEmpty {
@@ -70,8 +77,10 @@ public struct AddArtifactView: View {
                     Section("Datos Numismáticos") {
                         HStack {
                             TextField("Valor Facial (ej: 1, 50, 0.20)", text: $denomination)
-                            TextField("Divisa (EUR, JPY...)", text: $currencyCode)
-                                .frame(width: 90)
+                            Text(currencyCode)
+                                .font(.system(size: 14, weight: .bold))
+                                .foregroundStyle(Color.amberAccent)
+                                .frame(width: 70)
                         }
                         TextField("Año de Acuñación / Emisión (opcional)", text: $yearString)
                             .keyboardType(.numberPad)
@@ -91,7 +100,7 @@ public struct AddArtifactView: View {
                                     .frame(width: 44, height: 44)
                                     .clipShape(RoundedRectangle(cornerRadius: 8))
                             } else {
-                                Text("Añadir").foregroundColor(.amberAccent)
+                                Text("Añadir").foregroundStyle(Color.amberAccent)
                             }
                         }
                     }
@@ -115,7 +124,7 @@ public struct AddArtifactView: View {
                                     .frame(width: 44, height: 44)
                                     .clipShape(RoundedRectangle(cornerRadius: 8))
                             } else {
-                                Text("Añadir").foregroundColor(.secondary)
+                                Text("Añadir").foregroundStyle(.secondary)
                             }
                         }
                     }
@@ -147,6 +156,12 @@ public struct AddArtifactView: View {
                     .disabled(title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
             }
+            .sheet(isPresented: $showingCountryPicker) {
+                CountryPickerView(selectedCountry: $selectedCountry)
+            }
+            .onChange(of: selectedCountry) { _, newCountry in
+                currencyCode = newCountry.defaultCurrency
+            }
         }
     }
 
@@ -157,13 +172,13 @@ public struct AddArtifactView: View {
         let artifact = Artifact(
             category: category,
             title: title.trimmingCharacters(in: .whitespacesAndNewlines),
-            currencyCode: category.isNumismatic ? currencyCode.uppercased() : nil,
+            currencyCode: category.isNumismatic ? currencyCode : nil,
             denomination: category.isNumismatic ? denomination : nil,
             year: yearInt,
             imageFrontData: imageFrontData,
             imageBackData: imageBackData,
             story: story.isEmpty ? nil : story,
-            countryCode: countryCode.uppercased().trimmingCharacters(in: .whitespacesAndNewlines),
+            countryCode: selectedCountry.code,
             trip: matchedTrip
         )
 

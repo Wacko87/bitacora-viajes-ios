@@ -7,20 +7,20 @@ public struct AddEditTripView: View {
     @Environment(\.modelContext) private var modelContext
 
     @State private var title: String = ""
-    @State private var countryCode: String = "ES"
+    @State private var selectedCountry: CountryInfo = CountryCatalog.find(code: "JP")
+    @State private var showingCountryPicker: Bool = false
     @State private var city: String = ""
     @State private var startDate: Date = Date()
     @State private var endDate: Date = Date().addingTimeInterval(86400 * 4)
     @State private var status: TripStatus = .active
     @State private var summary: String = ""
     @State private var totalCostString: String = ""
-    @State private var costCurrency: String = "EUR"
+    @State private var costCurrency: String = "JPY"
     @State private var inclusions: String = ""
     @State private var costNotes: String = ""
 
     @State private var selectedPhotoItem: PhotosPickerItem? = nil
     @State private var coverImageData: Data? = nil
-    @State private var isFetchingWeather: Bool = false
 
     public init() {}
 
@@ -29,15 +29,22 @@ public struct AddEditTripView: View {
             Form {
                 Section("Destino") {
                     TextField("Título del Viaje (ej: Escapada a Kioto)", text: $title)
-                    HStack {
-                        Text("Código de País (ISO)")
-                        Spacer()
-                        TextField("ES, JP, US...", text: $countryCode)
-                            .multilineTextAlignment(.trailing)
-                            .textInputAutocapitalization(.characters)
-                            .frame(width: 80)
-                        CountryFlagView(countryCode: countryCode, fontSize: 18)
+
+                    Button {
+                        showingCountryPicker = true
+                    } label: {
+                        HStack {
+                            Text("País de Destino")
+                                .foregroundStyle(.primary)
+                            Spacer()
+                            Text("\(selectedCountry.flag) \(selectedCountry.name)")
+                                .foregroundStyle(.secondary)
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundStyle(.tertiary)
+                        }
                     }
+
                     TextField("Ciudad principal (ej: Kioto, Tokio)", text: $city)
                 }
 
@@ -64,7 +71,7 @@ public struct AddEditTripView: View {
                                 Image(systemName: "photo.badge.plus")
                                 Text("Seleccionar foto de portada")
                             }
-                            .foregroundColor(.amberAccent)
+                            .foregroundStyle(Color.amberAccent)
                         }
                     }
                     .onChange(of: selectedPhotoItem) { _, newItem in
@@ -80,12 +87,10 @@ public struct AddEditTripView: View {
                     HStack {
                         TextField("Coste Total", text: $totalCostString)
                             .keyboardType(.decimalPad)
-                        Picker("Divisa", selection: $costCurrency) {
-                            Text("EUR (€)").tag("EUR")
-                            Text("USD ($)").tag("USD")
-                            Text("JPY (¥)").tag("JPY")
-                            Text("GBP (£)").tag("GBP")
-                        }
+                        Text(costCurrency)
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundStyle(Color.amberAccent)
+                            .frame(width: 60)
                     }
                     TextField("Inclusiones (Vuelos, Hotel, Seguro...)", text: $inclusions)
                     TextField("Notas adicionales de gastos", text: $costNotes)
@@ -110,6 +115,12 @@ public struct AddEditTripView: View {
                     .disabled(title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
             }
+            .sheet(isPresented: $showingCountryPicker) {
+                CountryPickerView(selectedCountry: $selectedCountry)
+            }
+            .onChange(of: selectedCountry) { _, newCountry in
+                costCurrency = newCountry.defaultCurrency
+            }
         }
     }
 
@@ -117,7 +128,7 @@ public struct AddEditTripView: View {
         let cost = Double(totalCostString.replacingOccurrences(of: ",", with: "."))
         let trip = Trip(
             title: title.trimmingCharacters(in: .whitespacesAndNewlines),
-            countryCode: countryCode.uppercased().trimmingCharacters(in: .whitespacesAndNewlines),
+            countryCode: selectedCountry.code,
             city: city.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : city,
             startDate: startDate,
             endDate: endDate,

@@ -5,6 +5,8 @@ public struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) private var scenePhase
 
+    @AppStorage("has_completed_onboarding") private var hasCompletedOnboarding: Bool = false
+    @State private var showingOnboarding: Bool = false
     @State private var selectedTab: Int = 0
     @State private var isUnlocked: Bool = !BiometricAuthService.shared.isBiometricsEnabled
 
@@ -20,9 +22,15 @@ public struct ContentView: View {
         }
         .task {
             BitacoraViajesApp.seedInitialDataIfNeeded(context: modelContext)
+            if !hasCompletedOnboarding {
+                showingOnboarding = true
+            }
             if BiometricAuthService.shared.isBiometricsEnabled {
                 await authenticate()
             }
+        }
+        .sheet(isPresented: $showingOnboarding) {
+            OnboardingView(isPresented: $showingOnboarding)
         }
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .background && BiometricAuthService.shared.isBiometricsEnabled {
