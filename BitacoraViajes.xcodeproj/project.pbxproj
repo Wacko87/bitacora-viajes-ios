@@ -22,6 +22,7 @@
 		69D6F35C14A339ED555704F6 /* TripBookExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F64164160766218F6509FE /* TripBookExportView.swift */; };
 		6DCDD9A890A9122E8574F6CB /* TripsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEB4B8D51BA9AD72A4FF195 /* TripsViewModel.swift */; };
 		6E1DB8E5C6F26EAC8CED05F2 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47759D1E7DD16EE5F34A5B1 /* WeatherService.swift */; };
+		7223CE14F843D963D1888C29 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = CFD4227845E12673D3C82194 /* PrivacyInfo.xcprivacy */; };
 		77F0CEB2C1536B4220BBBC95 /* CoinFlipCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDB7066331F2FC9DC78DC5A /* CoinFlipCard.swift */; };
 		7F1299941D249BBD71AD7F06 /* AddEditTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4EA2E1301A98F56D9697A1 /* AddEditTripView.swift */; };
 		88E66464FA8018165F793B70 /* TripLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EA811BA4590A12D2AB24AC /* TripLog.swift */; };
@@ -69,6 +70,7 @@
 		B837A4468CAEE964B34B90CC /* PassportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportView.swift; sourceTree = "<group>"; };
 		B8F64164160766218F6509FE /* TripBookExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripBookExportView.swift; sourceTree = "<group>"; };
 		C2A8A8B61D974FA1F9590F97 /* Artifact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artifact.swift; sourceTree = "<group>"; };
+		CFD4227845E12673D3C82194 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		D47759D1E7DD16EE5F34A5B1 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		DE6494C79BBA6E757278BB17 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		E1E1B36AAF5DB8DA0DBD1C68 /* ProfileSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewModel.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				5F1E399FFA61A2D869F889B9 /* Assets.xcassets */,
+				CFD4227845E12673D3C82194 /* PrivacyInfo.xcprivacy */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B69E28446F193DCEFC2F6A0 /* Assets.xcassets in Resources */,
+				7223CE14F843D963D1888C29 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

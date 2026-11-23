@@ -4,6 +4,7 @@ public struct CoinFlipCard: View {
     public let artifact: Artifact
     public var cardSize: CGFloat = 170
 
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var isFlipped: Bool = false
     @State private var rotationDegrees: Double = 0
 
@@ -32,18 +33,27 @@ public struct CoinFlipCard: View {
             )
             .onTapGesture {
                 HapticManager.shared.coinFlip()
-                withAnimation(.spring(response: 0.55, dampingFraction: 0.75)) {
-                    isFlipped.toggle()
-                    rotationDegrees = isFlipped ? 180 : 0
+                if reduceMotion {
+                    withAnimation(.easeInOut(duration: 0.25)) {
+                        isFlipped.toggle()
+                        rotationDegrees = isFlipped ? 180 : 0
+                    }
+                } else {
+                    withAnimation(.spring(response: 0.55, dampingFraction: 0.75)) {
+                        isFlipped.toggle()
+                        rotationDegrees = isFlipped ? 180 : 0
+                    }
                 }
             }
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel("\(artifact.title), \(artifact.category.localizedName). Toca dos veces para voltear.")
 
             // Info labels
             VStack(spacing: 3) {
                 Text(artifact.title)
                     .font(.system(size: 13, weight: .bold))
                     .lineLimit(1)
-                    .foregroundColor(.primary)
+                    .foregroundStyle(.primary)
 
                 HStack(spacing: 4) {
                     if let code = artifact.countryCode {
@@ -51,11 +61,11 @@ public struct CoinFlipCard: View {
                     }
                     Text(artifact.denomination ?? artifact.category.localizedName)
                         .font(.system(size: 11, weight: .medium))
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                     if let year = artifact.year {
                         Text("• \(String(year))")
                             .font(.system(size: 11, weight: .regular))
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.secondary)
                     }
                 }
             }
@@ -73,16 +83,21 @@ public struct CoinFlipCard: View {
     private var frontView: some View {
         ZStack {
             if let data = artifact.imageFrontData, let uiImage = UIImage(data: data) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: cardSize - 16, height: cardSize - 16)
-                    .clipShape(artifact.category == .coin ? AnyShape(Circle()) : AnyShape(RoundedRectangle(cornerRadius: 12)))
-                    .overlay(
-                        artifact.category == .coin
-                        ? AnyView(Circle().stroke(Color.amberAccent.opacity(0.4), lineWidth: 2))
-                        : AnyView(RoundedRectangle(cornerRadius: 12).stroke(Color.amberAccent.opacity(0.4), lineWidth: 2))
-                    )
+                if artifact.category == .coin {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: cardSize - 16, height: cardSize - 16)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.amberAccent.opacity(0.4), lineWidth: 2))
+                } else {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: cardSize - 16, height: cardSize - 16)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.amberAccent.opacity(0.4), lineWidth: 2))
+                }
             } else {
                 placeholderCapsule(text: "Anverso")
             }
@@ -93,16 +108,21 @@ public struct CoinFlipCard: View {
     private var backView: some View {
         ZStack {
             if let data = artifact.imageBackData, let uiImage = UIImage(data: data) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: cardSize - 16, height: cardSize - 16)
-                    .clipShape(artifact.category == .coin ? AnyShape(Circle()) : AnyShape(RoundedRectangle(cornerRadius: 12)))
-                    .overlay(
-                        artifact.category == .coin
-                        ? AnyView(Circle().stroke(Color.blue.opacity(0.4), lineWidth: 2))
-                        : AnyView(RoundedRectangle(cornerRadius: 12).stroke(Color.blue.opacity(0.4), lineWidth: 2))
-                    )
+                if artifact.category == .coin {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: cardSize - 16, height: cardSize - 16)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.blue.opacity(0.4), lineWidth: 2))
+                } else {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: cardSize - 16, height: cardSize - 16)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.blue.opacity(0.4), lineWidth: 2))
+                }
             } else {
                 placeholderCapsule(text: "Reverso sin foto")
             }
@@ -130,10 +150,10 @@ public struct CoinFlipCard: View {
             VStack(spacing: 6) {
                 Image(systemName: artifact.category.systemIcon)
                     .font(.system(size: 32))
-                    .foregroundColor(.amberAccent)
+                    .foregroundStyle(Color.amberAccent)
                 Text(text)
                     .font(.system(size: 11, weight: .medium))
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
             }
         }
         .frame(width: cardSize - 16, height: cardSize - 16)
@@ -142,18 +162,4 @@ public struct CoinFlipCard: View {
 
 public extension Color {
     static let amberAccent = Color(red: 245/255, green: 158/255, blue: 11/255)
-}
-
-public struct AnyShape: Shape, @unchecked Sendable {
-    private let pathClosure: @Sendable (CGRect) -> Path
-
-    public init<S: Shape>(_ shape: S) {
-        self.pathClosure = { rect in
-            shape.path(in: rect)
-        }
-    }
-
-    public func path(in rect: CGRect) -> Path {
-        pathClosure(rect)
-    }
 }

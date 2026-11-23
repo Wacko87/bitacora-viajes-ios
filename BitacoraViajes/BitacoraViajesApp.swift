@@ -13,14 +13,7 @@ struct BitacoraViajesApp: App {
                 Artifact.self,
                 TripPhoto.self
             ])
-            let newContainer = try ModelContainer(for: schema)
-            self.container = newContainer
-
-            // Seed initial demo expedition if empty
-            let context = newContainer.mainContext
-            Task { @MainActor in
-                Self.seedInitialDataIfNeeded(context: context)
-            }
+            self.container = try ModelContainer(for: schema)
         } catch {
             fatalError("Could not initialize SwiftData ModelContainer: \(error.localizedDescription)")
         }
@@ -34,7 +27,7 @@ struct BitacoraViajesApp: App {
     }
 
     @MainActor
-    private static func seedInitialDataIfNeeded(context: ModelContext) {
+    public static func seedInitialDataIfNeeded(context: ModelContext) {
         let descriptor = FetchDescriptor<Trip>()
         guard (try? context.fetchCount(descriptor)) == 0 else { return }
 

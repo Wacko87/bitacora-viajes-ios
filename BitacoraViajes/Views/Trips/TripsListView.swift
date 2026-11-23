@@ -24,7 +24,7 @@ public struct TripsListView: View {
                     } else {
                         LazyVStack(spacing: 14) {
                             ForEach(filtered) { trip in
-                                NavigationLink(destination: TripDetailView(trip: trip)) {
+                                NavigationLink(value: trip) {
                                     TripCardView(trip: trip)
                                 }
                                 .buttonStyle(.plain)
@@ -42,6 +42,9 @@ public struct TripsListView: View {
                 }
                 .padding(.vertical)
             }
+            .navigationDestination(for: Trip.self) { trip in
+                TripDetailView(trip: trip)
+            }
             .background(Color(uiColor: .systemGroupedBackground))
             .navigationTitle("Cuaderno de Viajes")
             .searchable(text: $viewModel.searchText, prompt: "Buscar viaje, ciudad o país...")
@@ -53,8 +56,9 @@ public struct TripsListView: View {
                     } label: {
                         Image(systemName: "plus.circle.fill")
                             .font(.system(size: 20))
-                            .foregroundColor(.amberAccent)
+                            .foregroundStyle(Color.amberAccent)
                     }
+                    .accessibilityLabel("Nueva Expedición")
                 }
             }
             .sheet(isPresented: $showingAddSheet) {
@@ -88,7 +92,7 @@ public struct TripsListView: View {
                 .padding(.horizontal, 14)
                 .padding(.vertical, 7)
                 .background(isSelected ? Color.amberAccent : Color(uiColor: .secondarySystemGroupedBackground))
-                .foregroundColor(isSelected ? .black : .primary)
+                .foregroundStyle(isSelected ? .black : .primary)
                 .clipShape(Capsule())
                 .shadow(color: Color.black.opacity(isSelected ? 0.1 : 0.03), radius: 4, x: 0, y: 2)
         }
@@ -98,13 +102,13 @@ public struct TripsListView: View {
         VStack(spacing: 16) {
             Image(systemName: "airplane.circle")
                 .font(.system(size: 56))
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .padding(.top, 40)
             Text("No hay expediciones registradas")
                 .font(.headline)
             Text("Pulsa el botón + para comenzar a registrar vuestro próximo destino o memoria de viaje.")
                 .font(.subheadline)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 32)
         }
@@ -156,19 +160,19 @@ public struct TripCardView: View {
                     CountryFlagView(countryCode: trip.countryCode, fontSize: 16)
                     Text(trip.title)
                         .font(.system(size: 17, weight: .bold))
-                        .foregroundColor(.primary)
+                        .foregroundStyle(.primary)
                     Spacer()
                     if let min = trip.tempMin, let max = trip.tempMax {
                         Text("\(Int(min))° / \(Int(max))°C")
                             .font(.system(size: 12, weight: .medium))
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.secondary)
                     }
                 }
 
                 let location = [trip.city, trip.countryCode].compactMap { $0 }.joined(separator: ", ")
                 Text(location)
                     .font(.system(size: 13, weight: .medium))
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
 
                 HStack(spacing: 16) {
                     Label("\(trip.durationInDays) días", systemImage: "calendar")
@@ -178,11 +182,11 @@ public struct TripCardView: View {
                     if let cost = trip.totalCost {
                         Text(String(format: "%.0f %@", cost, trip.costCurrency ?? "EUR"))
                             .font(.system(size: 13, weight: .bold))
-                            .foregroundColor(.amberAccent)
+                            .foregroundStyle(Color.amberAccent)
                     }
                 }
                 .font(.system(size: 11))
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
             }
             .padding(14)
         }

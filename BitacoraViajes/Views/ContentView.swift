@@ -2,6 +2,7 @@ import SwiftUI
 import SwiftData
 
 public struct ContentView: View {
+    @Environment(\.modelContext) private var modelContext
     @State private var selectedTab: Int = 0
 
     public init() {}
@@ -39,5 +40,8 @@ public struct ContentView: View {
                 .tag(4)
         }
         .tint(.amberAccent)
+        .task {
+            BitacoraViajesApp.seedInitialDataIfNeeded(context: modelContext)
+        }
     }
 }

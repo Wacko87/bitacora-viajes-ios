@@ -40,24 +40,19 @@ public struct TripBookExportView: View {
                             preview: SharePreview("Libro de Viaje: \(trip.title)", image: Image(systemName: "book.pages.fill"))
                         ) {
                             Image(systemName: "square.and.arrow.up")
-                                .foregroundColor(.amberAccent)
+                                .foregroundStyle(Color.amberAccent)
                         }
+                        .accessibilityLabel("Compartir o Imprimir Libro de Viaje")
                     }
                 }
             }
-            .onAppear {
-                generatePDF()
+            .task {
+                self.pdfData = PDFExportService.shared.generateTripBook(
+                    trip: trip,
+                    partner1: partner1,
+                    partner2: partner2
+                )
             }
-        }
-    }
-
-    private func generatePDF() {
-        DispatchQueue.main.async {
-            self.pdfData = PDFExportService.shared.generateTripBook(
-                trip: trip,
-                partner1: partner1,
-                partner2: partner2
-            )
         }
     }
 }
