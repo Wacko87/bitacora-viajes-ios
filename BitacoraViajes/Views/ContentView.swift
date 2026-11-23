@@ -6,8 +6,8 @@ public struct ContentView: View {
     @Environment(\.scenePhase) private var scenePhase
 
     @AppStorage("has_completed_onboarding") private var hasCompletedOnboarding: Bool = false
+    @AppStorage("selected_tab_index") private var selectedTab: Int = 0
     @State private var showingOnboarding: Bool = false
-    @State private var selectedTab: Int = 0
     @State private var isUnlocked: Bool = !BiometricAuthService.shared.isBiometricsEnabled
 
     public init() {}
