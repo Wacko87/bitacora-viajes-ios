@@ -42,7 +42,8 @@ public struct TripDetailView: View {
                     Text("Crónica").tag(0)
                     Text("Numismática").tag(1)
                     Text("Vitrina").tag(2)
-                    Text("Detalles").tag(3)
+                    Text("Gastos").tag(3)
+                    Text("Detalles").tag(4)
                 }
                 .pickerStyle(.segmented)
                 .padding(.horizontal)
@@ -55,6 +56,8 @@ public struct TripDetailView: View {
                     numismaticsTab
                 case 2:
                     vitrinaTab
+                case 3:
+                    TripExpensesView(trip: trip)
                 default:
                     detailsTab
                 }
@@ -71,6 +74,28 @@ public struct TripDetailView: View {
                         showingExportSheet = true
                     } label: {
                         Label("Exportar Libro Editorial (PDF)", systemImage: "doc.richtext")
+                    }
+
+                    Button {
+                        Task {
+                            if TripLiveActivityManager.shared.isActivityActive {
+                                await TripLiveActivityManager.shared.endAllActivities()
+                            } else {
+                                await TripLiveActivityManager.shared.startActivity(
+                                    title: trip.title,
+                                    countryCode: trip.countryCode,
+                                    city: trip.city,
+                                    durationInDays: trip.durationInDays,
+                                    logsCount: trip.logs.count,
+                                    latestLogTitle: trip.logs.last?.title
+                                )
+                            }
+                        }
+                    } label: {
+                        Label(
+                            TripLiveActivityManager.shared.isActivityActive ? "Detener Dynamic Island" : "Iniciar en Dynamic Island",
+                            systemImage: "dot.radiowaves.left.and.right"
+                        )
                     }
 
                     Button {

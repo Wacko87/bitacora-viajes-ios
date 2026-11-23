@@ -28,6 +28,8 @@
 	<string>Permite guardar en tu galería el libro de viaje editorial y fotografías optimizadas.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Protege la privacidad de tus crónicas de viaje, memorias y gabinete numismático mediante autenticación biométrica.</string>
+	<key>NSSupportsLiveActivities</key>
+	<true/>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>UILaunchScreen</key>

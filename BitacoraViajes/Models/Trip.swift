@@ -44,6 +44,9 @@ public final class Trip {
     @Relationship(deleteRule: .cascade, inverse: \TripPhoto.trip)
     public var photos: [TripPhoto] = []
 
+    @Relationship(deleteRule: .cascade, inverse: \TripExpense.trip)
+    public var expenses: [TripExpense] = []
+
     public var status: TripStatus {
         get { TripStatus(rawValue: statusRaw) ?? .active }
         set { statusRaw = newValue.rawValue }

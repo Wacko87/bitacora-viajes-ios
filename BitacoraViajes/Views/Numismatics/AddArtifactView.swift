@@ -14,6 +14,7 @@ public struct AddArtifactView: View {
     @State private var title: String = ""
     @State private var selectedCountry: CountryInfo = CountryCatalog.find(code: "ES")
     @State private var showingCountryPicker: Bool = false
+    @State private var showingCoinScanner: Bool = false
     @State private var currencyCode: String = "EUR"
     @State private var denomination: String = "1"
     @State private var yearString: String = ""
@@ -88,6 +89,14 @@ public struct AddArtifactView: View {
                 }
 
                 Section("Fotografías de la Pieza (Cápsula 3D)") {
+                    Button {
+                        showingCoinScanner = true
+                    } label: {
+                        Label("Escanear Moneda Circular con IA", systemImage: "viewfinder.circle.fill")
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(Color.amberAccent)
+                    }
+
                     // Front Photo
                     PhotosPicker(selection: $frontPhotoItem, matching: .images) {
                         HStack {
@@ -158,6 +167,11 @@ public struct AddArtifactView: View {
             }
             .sheet(isPresented: $showingCountryPicker) {
                 CountryPickerView(selectedCountry: $selectedCountry)
+            }
+            .sheet(isPresented: $showingCoinScanner) {
+                CoinScannerView { pngData in
+                    imageFrontData = pngData
+                }
             }
             .onChange(of: selectedCountry) { _, newCountry in
                 currencyCode = newCountry.defaultCurrency

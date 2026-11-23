@@ -17,9 +17,17 @@ struct BitacoraViajesApp: App {
                 Trip.self,
                 TripLog.self,
                 Artifact.self,
-                TripPhoto.self
+                TripPhoto.self,
+                TripExpense.self
             ])
-            self.container = try ModelContainer(for: schema)
+            // Try configuring with CloudKit automatic synchronization first
+            let cloudConfig = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false, cloudKitDatabase: .automatic)
+            if let cloudContainer = try? ModelContainer(for: schema, configurations: [cloudConfig]) {
+                self.container = cloudContainer
+            } else {
+                let localConfig = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+                self.container = try ModelContainer(for: schema, configurations: [localConfig])
+            }
         } catch {
             fatalError("Could not initialize SwiftData ModelContainer: \(error.localizedDescription)")
         }
@@ -84,6 +92,30 @@ struct BitacoraViajesApp: App {
             trip: sampleTrip
         )
         sampleTrip.artifacts.append(ticket1)
+
+        let exp1 = TripExpense(
+            title: "Cena Kaiseki Tradicional en Gion",
+            amount: 140.0,
+            currencyCode: "EUR",
+            category: .food,
+            paidByPartnerIndex: 0,
+            split: .equal,
+            notes: "Menú degustación de 8 pasos con matcha y wagyu",
+            trip: sampleTrip
+        )
+        sampleTrip.expenses.append(exp1)
+
+        let exp2 = TripExpense(
+            title: "Pases JR Shinkansen (Ida y Vuelta)",
+            amount: 260.0,
+            currencyCode: "EUR",
+            category: .tickets,
+            paidByPartnerIndex: 1,
+            split: .equal,
+            notes: "Trayecto Tokio - Kioto con reserva de asientos Monte Fuji",
+            trip: sampleTrip
+        )
+        sampleTrip.expenses.append(exp2)
 
         try? context.save()
     }
