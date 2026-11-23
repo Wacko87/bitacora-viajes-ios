@@ -30,17 +30,24 @@ public actor WeatherService {
         "MA": (34.0209, -6.8416)
     ]
 
+    private var cache: [String: WeatherResult] = [:]
+
     private init() {}
 
     public func fetchWeather(forCity city: String?, countryCode: String, startDate: Date, endDate: Date) async -> WeatherResult {
-        let (lat, lon) = await resolveCoordinates(city: city, countryCode: countryCode)
-
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         formatter.locale = Locale(identifier: "en_US_POSIX")
 
         let startStr = formatter.string(from: startDate)
         let endStr = formatter.string(from: endDate)
+
+        let cacheKey = "\(countryCode.uppercased())_\(city?.lowercased() ?? "")_\(startStr)_\(endStr)"
+        if let cached = cache[cacheKey] {
+            return cached
+        }
+
+        let (lat, lon) = await resolveCoordinates(city: city, countryCode: countryCode)
 
         // If trip is in the past, use archive-api; if current/future, use forecast
         let isPast = endDate < Date()
@@ -86,10 +93,12 @@ public actor WeatherService {
             let overallMin = minTemps.min()
             let overallMax = maxTemps.max()
 
-            return WeatherResult(
+            let result = WeatherResult(
                 tempMin: overallMin != nil ? round(overallMin! * 10) / 10 : nil,
                 tempMax: overallMax != nil ? round(overallMax! * 10) / 10 : nil
             )
+            cache[cacheKey] = result
+            return result
         } catch {
             return WeatherResult(tempMin: nil, tempMax: nil)
         }

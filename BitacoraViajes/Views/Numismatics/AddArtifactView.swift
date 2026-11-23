@@ -116,7 +116,8 @@ public struct AddArtifactView: View {
                     .onChange(of: frontPhotoItem) { _, newItem in
                         Task {
                             if let data = try? await newItem?.loadTransferable(type: Data.self) {
-                                imageFrontData = data
+                                let optimized = ImageOptimizerService.shared.downsampleCoinPNG(imageData: data, maxDimension: 600) ?? data
+                                imageFrontData = optimized
                             }
                         }
                     }
@@ -140,7 +141,8 @@ public struct AddArtifactView: View {
                     .onChange(of: backPhotoItem) { _, newItem in
                         Task {
                             if let data = try? await newItem?.loadTransferable(type: Data.self) {
-                                imageBackData = data
+                                let optimized = ImageOptimizerService.shared.downsampleCoinPNG(imageData: data, maxDimension: 600) ?? data
+                                imageBackData = optimized
                             }
                         }
                     }

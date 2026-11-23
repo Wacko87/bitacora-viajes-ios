@@ -18,14 +18,17 @@
 		1DFE85D083EC2B5D6F10D7C2 /* PassportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C696FE45DB5FB09A4607BD0 /* PassportViewModel.swift */; };
 		25F1ECCEBA9ECAF6E40A6132 /* PartnerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AD16B75428AC52A662B015 /* PartnerProfile.swift */; };
 		3D84AF804E574BB279D3A870 /* TripsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F19B619E6085AD9670A1DBD /* TripsListView.swift */; };
+		3EDDE5C6A980FF3335519B7A /* BitacoraViajesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E561D7D38B431A4A3A33259B /* BitacoraViajesTests.swift */; };
 		3F8F4BA45F3F1E1A03DE5712 /* BitacoraViajesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A305C8032336E147458D613 /* BitacoraViajesApp.swift */; };
 		41CC7419990124BB559C225D /* TripPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CA8D8BE4DE49D44357903 /* TripPhoto.swift */; };
+		434112456E8EE6C9AE56D0FE /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9F2A4340760C4B441271C1 /* KeychainService.swift */; };
 		47AA3B25136706CA66CDEEFA /* VitrinaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B21F79CAF63CA39EBEE01E4 /* VitrinaViewModel.swift */; };
 		4E28A5E1A4E6BED013D07E28 /* CountryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD41B0CC69118C82731BB319 /* CountryPickerView.swift */; };
 		507A640A2EE141088066EFD9 /* TripAppEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AD0C1635C0455E9D24B8E6 /* TripAppEntity.swift */; };
 		5B69E28446F193DCEFC2F6A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F1E399FFA61A2D869F889B9 /* Assets.xcassets */; };
 		5CAF7D1422C0A842E59585C8 /* BitacoraIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F547E3E203ECD74DCFF51A /* BitacoraIntents.swift */; };
 		5E36590BD4F482B8920D58D3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9244DA9C992A84F690F997 /* ContentView.swift */; };
+		63F6D0F8705788E914C3A58F /* ImageOptimizerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45442BD6506FE095151EBC /* ImageOptimizerService.swift */; };
 		64A96EC5585691EEEF6A79BE /* Artifact.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A8A8B61D974FA1F9590F97 /* Artifact.swift */; };
 		69D6F35C14A339ED555704F6 /* TripBookExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F64164160766218F6509FE /* TripBookExportView.swift */; };
 		6DCDD9A890A9122E8574F6CB /* TripsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEB4B8D51BA9AD72A4FF195 /* TripsViewModel.swift */; };
@@ -58,6 +61,16 @@
 		FE41A735324B8A2F5B4EBF9E /* BiometricAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7B8BF11434CFFC5E87432E /* BiometricAuthService.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		183C450F7B25901CCB15C3DD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 322C46DF87C550A6EBAB415A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 82B6EB713E6BFE3D01381380;
+			remoteInfo = BitacoraViajes;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		02A2F27A64312416F8C45B59 /* BitacoraViajes.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = BitacoraViajes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03F9430B0E799CE1CDCB1DC7 /* CoinScannerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinScannerService.swift; sourceTree = "<group>"; };
@@ -70,9 +83,11 @@
 		2CED746396694D9917DA382C /* TripActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripActivityAttributes.swift; sourceTree = "<group>"; };
 		2F7B8BF11434CFFC5E87432E /* BiometricAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthService.swift; sourceTree = "<group>"; };
 		360E292E7CCDB60E9071B8D3 /* APISyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISyncService.swift; sourceTree = "<group>"; };
+		3C45442BD6506FE095151EBC /* ImageOptimizerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageOptimizerService.swift; sourceTree = "<group>"; };
 		44364519CF985ADD20ECDD45 /* AddTripLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripLogView.swift; sourceTree = "<group>"; };
 		4C696FE45DB5FB09A4607BD0 /* PassportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportViewModel.swift; sourceTree = "<group>"; };
 		4D5FAFF8A41217CFBC53C6F9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		5B9F2A4340760C4B441271C1 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		5DAFFD801F53817D4DE519E5 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		5F1E399FFA61A2D869F889B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66E3BE410016FAFDDD644BB5 /* VitrinaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitrinaView.swift; sourceTree = "<group>"; };
@@ -102,8 +117,10 @@
 		DE6494C79BBA6E757278BB17 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		E1E1B36AAF5DB8DA0DBD1C68 /* ProfileSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewModel.swift; sourceTree = "<group>"; };
 		E1F547E3E203ECD74DCFF51A /* BitacoraIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitacoraIntents.swift; sourceTree = "<group>"; };
+		E561D7D38B431A4A3A33259B /* BitacoraViajesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitacoraViajesTests.swift; sourceTree = "<group>"; };
 		E56CA8D8BE4DE49D44357903 /* TripPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripPhoto.swift; sourceTree = "<group>"; };
 		E8976A12D6E3F276C0116A2F /* NumismaticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumismaticsViewModel.swift; sourceTree = "<group>"; };
+		ED521B7624C59C1E01155518 /* BitacoraViajesTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = BitacoraViajesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF8E6EE60AAAFD14BD2F5C6F /* TripLiveActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripLiveActivityManager.swift; sourceTree = "<group>"; };
 		F1AD0C1635C0455E9D24B8E6 /* TripAppEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripAppEntity.swift; sourceTree = "<group>"; };
 		F776BEFDBAABE5B70AE6E85A /* CoinScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinScannerView.swift; sourceTree = "<group>"; };
@@ -172,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				0EEE9FB6C2CF672AE9D144B0 /* BitacoraViajes */,
+				86B07D0D29A7605E6964A117 /* BitacoraViajesTests */,
 				F816F54214E835EE85342609 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -215,6 +233,14 @@
 				EF8E6EE60AAAFD14BD2F5C6F /* TripLiveActivityManager.swift */,
 			);
 			path = LiveActivities;
+			sourceTree = "<group>";
+		};
+		86B07D0D29A7605E6964A117 /* BitacoraViajesTests */ = {
+			isa = PBXGroup;
+			children = (
+				E561D7D38B431A4A3A33259B /* BitacoraViajesTests.swift */,
+			);
+			path = BitacoraViajesTests;
 			sourceTree = "<group>";
 		};
 		8DC8B7425CCF2A0EAAD4E0D2 /* Views */ = {
@@ -274,6 +300,8 @@
 				2F7B8BF11434CFFC5E87432E /* BiometricAuthService.swift */,
 				03F9430B0E799CE1CDCB1DC7 /* CoinScannerService.swift */,
 				7C1BD82A8F7946453C79D78D /* HapticManager.swift */,
+				3C45442BD6506FE095151EBC /* ImageOptimizerService.swift */,
+				5B9F2A4340760C4B441271C1 /* KeychainService.swift */,
 				737642277AEAB08BFD14840B /* PDFExportService.swift */,
 				714060A1141CE896AB1C5FC5 /* VaultBackupService.swift */,
 				D47759D1E7DD16EE5F34A5B1 /* WeatherService.swift */,
@@ -296,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				02A2F27A64312416F8C45B59 /* BitacoraViajes.app */,
+				ED521B7624C59C1E01155518 /* BitacoraViajesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -315,6 +344,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		12F5D7EA9E3560D0595E74F3 /* BitacoraViajesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1032816F5CE320CA094098E5 /* Build configuration list for PBXNativeTarget "BitacoraViajesTests" */;
+			buildPhases = (
+				2685BEBC86E3B35D71126A70 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F354A65B1881053A9C835097 /* PBXTargetDependency */,
+			);
+			name = BitacoraViajesTests;
+			packageProductDependencies = (
+			);
+			productName = BitacoraViajesTests;
+			productReference = ED521B7624C59C1E01155518 /* BitacoraViajesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		82B6EB713E6BFE3D01381380 /* BitacoraViajes */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6911DB9D7037CCC796A9B5E3 /* Build configuration list for PBXNativeTarget "BitacoraViajes" */;
@@ -360,6 +407,7 @@
 			projectRoot = "";
 			targets = (
 				82B6EB713E6BFE3D01381380 /* BitacoraViajes */,
+				12F5D7EA9E3560D0595E74F3 /* BitacoraViajesTests */,
 			);
 		};
 /* End PBXProject section */
@@ -378,6 +426,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2685BEBC86E3B35D71126A70 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3EDDE5C6A980FF3335519B7A /* BitacoraViajesTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BA5F3E7547F32A0FC50ACE4B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -400,6 +456,8 @@
 				4E28A5E1A4E6BED013D07E28 /* CountryPickerView.swift in Sources */,
 				EC4F7A6B70FB7C643712A839 /* DualChronicleBubbleView.swift in Sources */,
 				C19F00FD486407A32ED8BC22 /* HapticManager.swift in Sources */,
+				63F6D0F8705788E914C3A58F /* ImageOptimizerService.swift in Sources */,
+				434112456E8EE6C9AE56D0FE /* KeychainService.swift in Sources */,
 				17C417CD8E6EC4DD17BDECB2 /* NumismaticCabinetView.swift in Sources */,
 				AA3AACE48B02499F91D6F517 /* NumismaticsViewModel.swift in Sources */,
 				6E6F735DE43B2A6D98A5D988 /* OnboardingView.swift in Sources */,
@@ -432,6 +490,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F354A65B1881053A9C835097 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 82B6EB713E6BFE3D01381380 /* BitacoraViajes */;
+			targetProxy = 183C450F7B25901CCB15C3DD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1F6E45758F065CC9DF861D6F /* Debug */ = {
@@ -510,6 +576,24 @@
 				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
+		};
+		6B4C3F5AC9754AE47E5AC3EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGNING_ALLOWED = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitacoraviajes.app.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BitacoraViajes.app/BitacoraViajes";
+			};
+			name = Debug;
 		};
 		BDC3B79A0D2C18B8CF4444B6 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -595,9 +679,36 @@
 			};
 			name = Release;
 		};
+		F9998510692F9C801CC0978A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGNING_ALLOWED = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitacoraviajes.app.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BitacoraViajes.app/BitacoraViajes";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1032816F5CE320CA094098E5 /* Build configuration list for PBXNativeTarget "BitacoraViajesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6B4C3F5AC9754AE47E5AC3EC /* Debug */,
+				F9998510692F9C801CC0978A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		6911DB9D7037CCC796A9B5E3 /* Build configuration list for PBXNativeTarget "BitacoraViajes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

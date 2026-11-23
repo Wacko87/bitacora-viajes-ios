@@ -28,12 +28,6 @@ public final class CoinScannerService: @unchecked Sendable {
         
         guard let croppedCG = cgImage.cropping(to: cropRect) else { return nil }
         
-        let ciImage = CIImage(cgImage: croppedCG)
-        
-        // Circular mask filter
-        let center = CIVector(x: minDimension / 2.0, y: minDimension / 2.0)
-        let radius = (minDimension / 2.0) * 0.96 // Slight padding
-        
         // Create radial mask or circular clipping
         UIGraphicsBeginImageContextWithOptions(CGSize(width: minDimension, height: minDimension), false, image.scale)
         guard let context = UIGraphicsGetCurrentContext() else {

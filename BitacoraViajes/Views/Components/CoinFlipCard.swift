@@ -26,6 +26,7 @@ public struct CoinFlipCard: View {
                     .opacity(rotationDegrees >= 90 ? 1 : 0)
             }
             .frame(width: cardSize, height: cardSize)
+            .compositingGroup()
             .rotation3DEffect(
                 .degrees(rotationDegrees),
                 axis: (x: 0.0, y: 1.0, z: 0.0),

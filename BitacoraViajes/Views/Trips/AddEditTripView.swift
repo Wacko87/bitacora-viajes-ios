@@ -76,8 +76,9 @@ public struct AddEditTripView: View {
                     }
                     .onChange(of: selectedPhotoItem) { _, newItem in
                         Task {
-                            if let data = try? await newItem?.loadTransferable(type: Data.self) {
-                                coverImageData = data
+                            if let rawData = try? await newItem?.loadTransferable(type: Data.self) {
+                                let optimized = ImageOptimizerService.shared.downsample(imageData: rawData, maxDimension: 1920) ?? rawData
+                                coverImageData = optimized
                             }
                         }
                     }
