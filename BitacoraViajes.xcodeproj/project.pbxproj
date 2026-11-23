@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0106E5E7E1CF5EB2A5C8F1A0 /* StatCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155C5F46771DEF72EEEDFA10 /* StatCardView.swift */; };
 		0C959BDEA5AB9EB95277F1E8 /* CirculatingPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB4C6F38E0D490044B7F884 /* CirculatingPiece.swift */; };
+		157605DEC1573B472018644A /* VaultBackupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714060A1141CE896AB1C5FC5 /* VaultBackupService.swift */; };
 		17C417CD8E6EC4DD17BDECB2 /* NumismaticCabinetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB6F92230C7CDD030F07AE /* NumismaticCabinetView.swift */; };
 		1DFE85D083EC2B5D6F10D7C2 /* PassportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C696FE45DB5FB09A4607BD0 /* PassportViewModel.swift */; };
 		25F1ECCEBA9ECAF6E40A6132 /* PartnerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AD16B75428AC52A662B015 /* PartnerProfile.swift */; };
@@ -35,11 +36,13 @@
 		BD0CFD2F5279B0FF0218760B /* APISyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360E292E7CCDB60E9071B8D3 /* APISyncService.swift */; };
 		C19F00FD486407A32ED8BC22 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BD82A8F7946453C79D78D /* HapticManager.swift */; };
 		C71066D7335001073242F474 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6494C79BBA6E757278BB17 /* Trip.swift */; };
+		D6CA1B375423DFF82A98C987 /* Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F7B9BD2C5A357DC6CC9167 /* Tips.swift */; };
 		D9E3D83E6129FCCF3CC20409 /* PDFExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737642277AEAB08BFD14840B /* PDFExportService.swift */; };
 		E54CBD9DB501C55C31CE1081 /* VitrinaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E3BE410016FAFDDD644BB5 /* VitrinaView.swift */; };
 		EC4F7A6B70FB7C643712A839 /* DualChronicleBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A160B5C2B69CA23E2F132AE6 /* DualChronicleBubbleView.swift */; };
 		EDA05905793FC2CB3474026C /* TripDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9722E0B543264E082A55B7CF /* TripDetailView.swift */; };
 		EDBEB229471DAF509AFF41FC /* AddTripLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44364519CF985ADD20ECDD45 /* AddTripLogView.swift */; };
+		FE41A735324B8A2F5B4EBF9E /* BiometricAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7B8BF11434CFFC5E87432E /* BiometricAuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,12 +53,14 @@
 		17EA811BA4590A12D2AB24AC /* TripLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripLog.swift; sourceTree = "<group>"; };
 		1F19B619E6085AD9670A1DBD /* TripsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsListView.swift; sourceTree = "<group>"; };
 		2CEB4B8D51BA9AD72A4FF195 /* TripsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsViewModel.swift; sourceTree = "<group>"; };
+		2F7B8BF11434CFFC5E87432E /* BiometricAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthService.swift; sourceTree = "<group>"; };
 		360E292E7CCDB60E9071B8D3 /* APISyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISyncService.swift; sourceTree = "<group>"; };
 		44364519CF985ADD20ECDD45 /* AddTripLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripLogView.swift; sourceTree = "<group>"; };
 		4C696FE45DB5FB09A4607BD0 /* PassportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportViewModel.swift; sourceTree = "<group>"; };
 		4D5FAFF8A41217CFBC53C6F9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		5F1E399FFA61A2D869F889B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66E3BE410016FAFDDD644BB5 /* VitrinaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitrinaView.swift; sourceTree = "<group>"; };
+		714060A1141CE896AB1C5FC5 /* VaultBackupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultBackupService.swift; sourceTree = "<group>"; };
 		737642277AEAB08BFD14840B /* PDFExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportService.swift; sourceTree = "<group>"; };
 		7A305C8032336E147458D613 /* BitacoraViajesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitacoraViajesApp.swift; sourceTree = "<group>"; };
 		7B21F79CAF63CA39EBEE01E4 /* VitrinaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitrinaViewModel.swift; sourceTree = "<group>"; };
@@ -69,6 +74,7 @@
 		ABB4C6F38E0D490044B7F884 /* CirculatingPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirculatingPiece.swift; sourceTree = "<group>"; };
 		B837A4468CAEE964B34B90CC /* PassportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportView.swift; sourceTree = "<group>"; };
 		B8F64164160766218F6509FE /* TripBookExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripBookExportView.swift; sourceTree = "<group>"; };
+		B8F7B9BD2C5A357DC6CC9167 /* Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tips.swift; sourceTree = "<group>"; };
 		C2A8A8B61D974FA1F9590F97 /* Artifact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artifact.swift; sourceTree = "<group>"; };
 		CFD4227845E12673D3C82194 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		D47759D1E7DD16EE5F34A5B1 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
@@ -197,8 +203,10 @@
 			isa = PBXGroup;
 			children = (
 				360E292E7CCDB60E9071B8D3 /* APISyncService.swift */,
+				2F7B8BF11434CFFC5E87432E /* BiometricAuthService.swift */,
 				7C1BD82A8F7946453C79D78D /* HapticManager.swift */,
 				737642277AEAB08BFD14840B /* PDFExportService.swift */,
+				714060A1141CE896AB1C5FC5 /* VaultBackupService.swift */,
 				D47759D1E7DD16EE5F34A5B1 /* WeatherService.swift */,
 			);
 			path = Services;
@@ -209,6 +217,7 @@
 			children = (
 				5F1E399FFA61A2D869F889B9 /* Assets.xcassets */,
 				CFD4227845E12673D3C82194 /* PrivacyInfo.xcprivacy */,
+				B8F7B9BD2C5A357DC6CC9167 /* Tips.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -305,6 +314,7 @@
 				7F1299941D249BBD71AD7F06 /* AddEditTripView.swift in Sources */,
 				EDBEB229471DAF509AFF41FC /* AddTripLogView.swift in Sources */,
 				64A96EC5585691EEEF6A79BE /* Artifact.swift in Sources */,
+				FE41A735324B8A2F5B4EBF9E /* BiometricAuthService.swift in Sources */,
 				3F8F4BA45F3F1E1A03DE5712 /* BitacoraViajesApp.swift in Sources */,
 				0C959BDEA5AB9EB95277F1E8 /* CirculatingPiece.swift in Sources */,
 				77F0CEB2C1536B4220BBBC95 /* CoinFlipCard.swift in Sources */,
@@ -321,6 +331,7 @@
 				B92CAE067826BB2A637888A7 /* ProfileSettingsViewModel.swift in Sources */,
 				A6237E39985A8CB97FD0ECCB /* SettingsView.swift in Sources */,
 				0106E5E7E1CF5EB2A5C8F1A0 /* StatCardView.swift in Sources */,
+				D6CA1B375423DFF82A98C987 /* Tips.swift in Sources */,
 				C71066D7335001073242F474 /* Trip.swift in Sources */,
 				69D6F35C14A339ED555704F6 /* TripBookExportView.swift in Sources */,
 				EDA05905793FC2CB3474026C /* TripDetailView.swift in Sources */,
@@ -328,6 +339,7 @@
 				41CC7419990124BB559C225D /* TripPhoto.swift in Sources */,
 				3D84AF804E574BB279D3A870 /* TripsListView.swift in Sources */,
 				6DCDD9A890A9122E8574F6CB /* TripsViewModel.swift in Sources */,
+				157605DEC1573B472018644A /* VaultBackupService.swift in Sources */,
 				E54CBD9DB501C55C31CE1081 /* VitrinaView.swift in Sources */,
 				47AA3B25136706CA66CDEEFA /* VitrinaViewModel.swift in Sources */,
 				6E1DB8E5C6F26EAC8CED05F2 /* WeatherService.swift in Sources */,

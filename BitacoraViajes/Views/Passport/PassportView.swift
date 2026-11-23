@@ -58,15 +58,15 @@ public struct PassportView: View {
                     Text("PASAPORTE OFICIAL DE EXPEDICIÓN")
                         .font(.system(size: 11, weight: .black))
                         .tracking(1.5)
-                        .foregroundColor(.amberAccent)
+                        .foregroundStyle(Color.amberAccent)
                     Text("\(partner1.name) & \(partner2.name)")
                         .font(.system(size: 24, weight: .bold))
-                        .foregroundColor(.white)
+                        .foregroundStyle(.white)
                 }
                 Spacer()
                 Image(systemName: "globe.europe.africa.fill")
                     .font(.system(size: 40))
-                    .foregroundColor(.amberAccent.opacity(0.8))
+                    .foregroundStyle(Color.amberAccent.opacity(0.8))
             }
 
             Divider()
@@ -78,7 +78,7 @@ public struct PassportView: View {
                 Label("Expediciones activas", systemImage: "airplane")
             }
             .font(.system(size: 12, weight: .medium))
-            .foregroundColor(.white.opacity(0.8))
+            .foregroundStyle(.white.opacity(0.8))
         }
         .padding(20)
         .background(
@@ -136,7 +136,7 @@ public struct PassportView: View {
             if metrics.visitedCountryCodes.isEmpty {
                 Text("No hay sellos de visado aún. Completad vuestro primer viaje para sellar el pasaporte.")
                     .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
                     .padding(.horizontal)
             } else {
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -157,10 +157,10 @@ public struct PassportView: View {
             Text(countryCode)
                 .font(.system(size: 12, weight: .black))
                 .tracking(2)
-                .foregroundColor(.amberAccent)
+                .foregroundStyle(Color.amberAccent)
             Text("VISITADO")
                 .font(.system(size: 9, weight: .bold))
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
         }
         .padding(14)
         .frame(width: 100, height: 100)
@@ -178,10 +178,63 @@ public struct PassportView: View {
                 .font(.system(size: 15, weight: .bold))
                 .padding(.horizontal)
 
-            Map(position: $mapPosition)
-                .frame(height: 220)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
-                .padding(.horizontal)
+            Map(position: $mapPosition) {
+                ForEach(tripMarkers) { marker in
+                    Annotation(marker.trip.title, coordinate: marker.coordinate) {
+                        VStack(spacing: 2) {
+                            CountryFlagView(countryCode: marker.trip.countryCode, fontSize: 26)
+                                .shadow(color: .black.opacity(0.3), radius: 3)
+                            Text(marker.trip.city ?? marker.trip.title)
+                                .font(.system(size: 10, weight: .bold))
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 2)
+                                .background(.ultraThinMaterial)
+                                .clipShape(Capsule())
+                        }
+                    }
+                }
+            }
+            .mapStyle(.standard(elevation: .realistic))
+            .frame(height: 240)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .padding(.horizontal)
         }
     }
+
+    private var tripMarkers: [TripMarker] {
+        trips.map { trip in
+            TripMarker(trip: trip, coordinate: resolveCoordinate(countryCode: trip.countryCode, city: trip.city))
+        }
+    }
+
+    private func resolveCoordinate(countryCode: String, city: String?) -> CLLocationCoordinate2D {
+        switch countryCode.uppercased() {
+        case "JP":
+            return city?.lowercased().contains("tokio") == true
+                ? CLLocationCoordinate2D(latitude: 35.6762, longitude: 139.6503)
+                : CLLocationCoordinate2D(latitude: 35.0116, longitude: 135.7681) // Kioto
+        case "ES":
+            return city?.lowercased().contains("barcelona") == true
+                ? CLLocationCoordinate2D(latitude: 41.3879, longitude: 2.1699)
+                : CLLocationCoordinate2D(latitude: 40.4168, longitude: -3.7038) // Madrid
+        case "FR":
+            return CLLocationCoordinate2D(latitude: 48.8566, longitude: 2.3522) // París
+        case "IT":
+            return CLLocationCoordinate2D(latitude: 41.9028, longitude: 12.4964) // Roma
+        case "GB":
+            return CLLocationCoordinate2D(latitude: 51.5074, longitude: -0.1278) // Londres
+        case "US":
+            return CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060) // Nueva York
+        case "EG":
+            return CLLocationCoordinate2D(latitude: 30.0444, longitude: 31.2357) // El Cairo
+        default:
+            return CLLocationCoordinate2D(latitude: 20.0, longitude: 0.0)
+        }
+    }
+}
+
+public struct TripMarker: Identifiable {
+    public var id: UUID { trip.id }
+    public let trip: Trip
+    public let coordinate: CLLocationCoordinate2D
 }

@@ -26,6 +26,8 @@
 	<string>Bitácora de Viajes requiere acceso a tus fotos para añadir imágenes al álbum de crónicas y piezas numismáticas.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Permite guardar en tu galería el libro de viaje editorial y fotografías optimizadas.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Protege la privacidad de tus crónicas de viaje, memorias y gabinete numismático mediante autenticación biométrica.</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>UILaunchScreen</key>

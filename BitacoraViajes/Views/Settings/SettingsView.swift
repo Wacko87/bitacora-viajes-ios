@@ -1,7 +1,10 @@
 import SwiftUI
+import SwiftData
 
 public struct SettingsView: View {
+    @Query private var allTrips: [Trip]
     @State private var viewModel = ProfileSettingsViewModel()
+    @State private var isBiometricsEnabled: Bool = BiometricAuthService.shared.isBiometricsEnabled
 
     public init() {}
 
@@ -27,6 +30,29 @@ public struct SettingsView: View {
                             .onChange(of: viewModel.partner2.name) { _, _ in
                                 viewModel.saveProfiles()
                             }
+                    }
+                }
+
+                Section("Seguridad y Privacidad") {
+                    Toggle(
+                        "Bloquear con \(BiometricAuthService.shared.biometricTypeString)",
+                        isOn: $isBiometricsEnabled
+                    )
+                    .onChange(of: isBiometricsEnabled) { _, newValue in
+                        BiometricAuthService.shared.isBiometricsEnabled = newValue
+                        HapticManager.shared.notification(.success)
+                    }
+                }
+
+                Section("Copia de Seguridad y Bóveda") {
+                    if let backup = VaultBackupService.shared.exportVault(trips: allTrips) {
+                        ShareLink(
+                            item: backup,
+                            preview: SharePreview("Copia de Seguridad Bitácora", image: Image(systemName: "archivebox.fill"))
+                        ) {
+                            Label("Exportar Bóveda Completa (JSON)", systemImage: "square.and.arrow.up")
+                                .foregroundStyle(Color.amberAccent)
+                        }
                     }
                 }
 
@@ -71,19 +97,19 @@ public struct SettingsView: View {
                         Text("Versión")
                         Spacer()
                         Text("1.0.0 (Nativa iOS)")
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.secondary)
                     }
                     HStack {
                         Text("Persistencia")
                         Spacer()
                         Text("SwiftData (Offline-First)")
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.secondary)
                     }
                     HStack {
                         Text("Gabinete 3D")
                         Spacer()
                         Text("ProMotion 120Hz & Haptics")
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.secondary)
                     }
                 }
             }

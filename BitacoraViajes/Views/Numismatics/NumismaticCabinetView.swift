@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import TipKit
 
 public struct NumismaticCabinetView: View {
     @Environment(\.modelContext) private var modelContext
@@ -7,6 +8,7 @@ public struct NumismaticCabinetView: View {
 
     @State private var viewModel = NumismaticsViewModel()
     @State private var showingAddSheet = false
+    private let coinFlipTip = CoinFlipTip()
 
     public init() {}
 
@@ -14,6 +16,10 @@ public struct NumismaticCabinetView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
+                    // TipKit Onboarding
+                    TipView(coinFlipTip, arrowEdge: .bottom)
+                        .padding(.horizontal)
+
                     // Category Chips (Todas / Monedas / Billetes)
                     categorySelector
 
