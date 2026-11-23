@@ -37,7 +37,7 @@ public struct SettingsView: View {
                         }
 
                     if viewModel.serverConfig.isEnabled {
-                        TextField("URL Servidor (ej: https://bitacora.wacko87.es)", text: $viewModel.serverConfig.serverURL)
+                        TextField("URL Servidor (ej: https://api.tu-servidor.com)", text: $viewModel.serverConfig.serverURL)
                             .textInputAutocapitalization(.never)
                             .keyboardType(.URL)
                             .onChange(of: viewModel.serverConfig.serverURL) { _, _ in

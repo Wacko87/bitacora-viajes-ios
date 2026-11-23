@@ -15,14 +15,14 @@ public struct PartnerProfile: Identifiable, Codable, Sendable {
 
     public static let defaultPartner1 = PartnerProfile(
         id: "partner_1",
-        name: "Oscar",
+        name: "Viajero 1",
         role: "partner_1",
         avatarColorHex: "#F59E0B"
     )
 
     public static let defaultPartner2 = PartnerProfile(
         id: "partner_2",
-        name: "Pareja",
+        name: "Viajero 2",
         role: "partner_2",
         avatarColorHex: "#EC4899"
     )

@@ -13,14 +13,14 @@
    - El registro en la wiki forma parte indivisible de la tarea. No se dará una intervención por finalizada sin haber guardado y sincronizado la documentación técnica correspondiente.
 
 2. **Doble Registro Sincronizado (Obsidian + Trilium Notes):**
-   - **Bóveda local de Obsidian:** Crear o actualizar el archivo Markdown en `/Users/wacko87/Desktop/Proyectos Antigravity/Antigravity/`.
+   - **Bóveda local de Obsidian:** Crear o actualizar el archivo Markdown en `$HOME/Desktop/Proyectos Antigravity/Antigravity/`.
    - **Trilium Notes:** Usar **SIEMPRE** el cliente estandarizado del workspace para que el permiso permanente (*Opción 3: Siempre en este proyecto*) se mantenga activo sin volver a pedir confirmación:
      ```bash
-     python3 "/Users/wacko87/Desktop/Proyectos Antigravity/trilium-client.py" create --title "Título" --file "/ruta/nota.md"
-     python3 "/Users/wacko87/Desktop/Proyectos Antigravity/trilium-client.py" update --id "ID_NOTA" --file "/ruta/nota.md"
+     python3 "$HOME/Desktop/Proyectos Antigravity/trilium-client.py" create --title "Título" --file "/ruta/nota.md"
+     python3 "$HOME/Desktop/Proyectos Antigravity/trilium-client.py" update --id "ID_NOTA" --file "/ruta/nota.md"
      ```
      *(Prohibido usar `python3 -c '...'` dinámico para Trilium, ya que invalida el permiso persistente).*
-   - **Índice Central:** Enlazar siempre la nueva guía técnica en [`Bienvenido.md`](/Users/wacko87/Desktop/Proyectos%20Antigravity/Antigravity/Bienvenido.md).
+   - **Índice Central:** Enlazar siempre la nueva guía técnica en `Bienvenido.md`.
 
 3. **Creación de Guías Monográficas Específicas:**
    - Cada cambio relevante debe contar con su **nota técnica independiente** (por ejemplo: migración de un servicio, limpieza de huérfanos, configuración de protocolos, asignación de cuotas).
@@ -29,7 +29,7 @@
 4. **Sincronización de Inventarios:**
    - Si la intervención altera contenedores Docker o dominios CNAME en Nginx Proxy Manager, ejecutar siempre el script de sincronización:
      ```bash
-     python3 "/Users/wacko87/Desktop/Proyectos Antigravity/actualizar-inventario-docker.py"
+     python3 "$HOME/Desktop/Proyectos Antigravity/actualizar-inventario-docker.py"
      ```
 
 5. **Estructura Requerida en Cada Guía:**

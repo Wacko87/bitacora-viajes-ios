@@ -350,7 +350,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wacko87.bitacoraviajes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitacoraviajes.app;
 				PRODUCT_NAME = BitacoraViajes;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -491,7 +491,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wacko87.bitacoraviajes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitacoraviajes.app;
 				PRODUCT_NAME = BitacoraViajes;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

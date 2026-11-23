@@ -1,6 +1,6 @@
 name: BitacoraViajes
 options:
-  bundleIdPrefix: com.wacko87
+  bundleIdPrefix: com.bitacoraviajes
   deploymentTarget:
     iOS: "17.0"
   xcodeVersion: "16.0"
@@ -22,7 +22,7 @@ targets:
           - "Resources/Info.plist"
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.wacko87.bitacoraviajes
+        PRODUCT_BUNDLE_IDENTIFIER: com.bitacoraviajes.app
         PRODUCT_NAME: BitacoraViajes
         INFOPLIST_FILE: BitacoraViajes/Resources/Info.plist
         GENERATE_INFOPLIST_FILE: NO
