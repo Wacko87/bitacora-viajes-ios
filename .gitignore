@@ -1,4 +1,4 @@
-# Xcode
+# Xcode & macOS
 .DS_Store
 build/
 DerivedData/
@@ -8,3 +8,23 @@ xcuserdata/
 *.ipa
 *.dSYM.zip
 *.dSYM
+
+# Environment Variables & Secrets (Punto 6)
+.env
+.env.*
+*.env
+Secrets.swift
+*.secret
+*.key
+*.pem
+*.p12
+*.cer
+*.mobileprovision
+
+# Database & Local Backups
+*.sqlite
+*.sqlite3
+*.db
+*.bak
+*.backup
+*.dump
