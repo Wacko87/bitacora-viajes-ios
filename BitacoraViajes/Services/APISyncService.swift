@@ -17,6 +17,7 @@ public actor APISyncService {
 
     private let configKey = "bitacora_server_config"
     private let keychainPinKey = "bitacora_server_api_pin"
+    private var lastConnectionAttempt: Date?
 
     private init() {}
 
@@ -38,18 +39,34 @@ public actor APISyncService {
             KeychainService.shared.delete(key: keychainPinKey)
         }
 
-        // Store non-sensitive metadata in UserDefaults with sanitized PIN
+        // Store non-sensitive metadata in UserDefaults with sanitized PIN and enforced HTTPS
         var sanitizedConfig = config
         sanitizedConfig.apiPin = "" // Stripped from UserDefaults
+        if !sanitizedConfig.serverURL.isEmpty && !sanitizedConfig.serverURL.lowercased().hasPrefix("https://") {
+            let cleaned = sanitizedConfig.serverURL.replacingOccurrences(of: "http://", with: "")
+            sanitizedConfig.serverURL = "https://\(cleaned)"
+        }
         if let data = try? JSONEncoder().encode(sanitizedConfig) {
             UserDefaults.standard.set(data, forKey: configKey)
         }
     }
 
     public func testConnection(url: String, pin: String) async -> (success: Bool, message: String) {
-        guard let server = URL(string: url.trimmingCharacters(in: .whitespacesAndNewlines)) else {
-            return (false, "URL no válida")
+        // Punto 18: HTTPS obligatorio (validación de esquema seguro antes de procesar)
+        let trimmed = url.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let server = URL(string: trimmed),
+              let scheme = server.scheme?.lowercased(),
+              scheme == "https" else {
+            return (false, "Seguridad HTTPS obligatoria: Solo se admiten conexiones seguras que comiencen con 'https://'")
         }
+
+        // Punto 19: Rate Limiting / Throttling (cooldown de 2 segundos entre intentos de conexión)
+        let now = Date()
+        if let last = lastConnectionAttempt, now.timeIntervalSince(last) < 2.0 {
+            return (false, "Límite de intentos: Por seguridad, espera 2 segundos antes de volver a probar la conexión.")
+        }
+        lastConnectionAttempt = now
+
         let pingURL = server.appendingPathComponent("api/auth/status")
         var request = URLRequest(url: pingURL)
         request.httpMethod = "GET"

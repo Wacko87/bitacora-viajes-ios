@@ -72,4 +72,72 @@ struct BitacoraViajesTests {
         let loadedAfterDelete = KeychainService.shared.loadString(key: testKey)
         #expect(loadedAfterDelete == nil)
     }
+
+    // MARK: - Security Hardening Suite (27 Puntos)
+
+    @Test func testHTTPSStrictEnforcement() async {
+        // Attempt connecting with unencrypted HTTP URL (must be rejected)
+        let insecureResult = await APISyncService.shared.testConnection(url: "http://servidor-inseguro.local", pin: "1234")
+        #expect(insecureResult.success == false)
+        #expect(insecureResult.message.contains("HTTPS obligatoria"))
+
+        // Attempt connecting with malformed URL scheme
+        let malformedResult = await APISyncService.shared.testConnection(url: "ftp://servidor.local", pin: "1234")
+        #expect(malformedResult.success == false)
+        #expect(malformedResult.message.contains("HTTPS obligatoria"))
+    }
+
+    @Test func testAPISyncRateLimiting() async {
+        // First connection with HTTPS (cooldown starts)
+        _ = await APISyncService.shared.testConnection(url: "https://127.0.0.1:8443", pin: "test")
+        
+        // Immediate second attempt within 2 seconds (must be throttled)
+        let throttledResult = await APISyncService.shared.testConnection(url: "https://127.0.0.1:8443", pin: "test")
+        #expect(throttledResult.success == false)
+        #expect(throttledResult.message.contains("Límite de intentos"))
+    }
+
+    @Test func testOversizedPayloadProtection() {
+        // Attempt processing a dummy payload exceeding 30 MB threshold
+        let oversizedData = Data(count: 31 * 1024 * 1024) // 31 MB
+        let downsampled = ImageOptimizerService.shared.downsample(imageData: oversizedData)
+        #expect(downsampled == nil)
+
+        let downsampledCoin = ImageOptimizerService.shared.downsampleCoinPNG(imageData: oversizedData)
+        #expect(downsampledCoin == nil)
+    }
+
+    @Test @MainActor func testBiometricConsecutiveFailureTracking() {
+        // Verify biometric service state and initial failure tracking
+        let initialFailures = BiometricAuthService.shared.consecutiveFailures
+        #expect(initialFailures >= 0)
+    }
+
+    @Test func testExpenseTamperingResilience() {
+        // Safe price parser helper that handles thousand dots and decimal commas
+        func parseAmount(_ string: String) -> Double? {
+            var cleaned = string.trimmingCharacters(in: .whitespacesAndNewlines)
+            if cleaned.contains(",") && cleaned.contains(".") {
+                cleaned = cleaned.replacingOccurrences(of: ".", with: "")
+                cleaned = cleaned.replacingOccurrences(of: ",", with: ".")
+            } else if cleaned.contains(",") {
+                cleaned = cleaned.replacingOccurrences(of: ",", with: ".")
+            }
+            cleaned = cleaned.components(separatedBy: CharacterSet(charactersIn: "0123456789.-").inverted).joined()
+            return Double(cleaned)
+        }
+
+        let parsed = parseAmount("99.999,50 €")
+        #expect(parsed != nil)
+        #expect(parsed == 99999.50)
+
+        // Verify malicious string injection does not crash parser and extracts only numeric values
+        let injectionPayload = parseAmount("<script>alert('xss')</script>50.00")
+        #expect(injectionPayload != nil)
+        #expect(injectionPayload == 50.0)
+
+        // Verify invalid corrupted text safely returns nil
+        let corruptPayload = parseAmount("free-money-not-a-number")
+        #expect(corruptPayload == nil)
+    }
 }

@@ -3,6 +3,7 @@ import ImageIO
 
 public final class ImageOptimizerService: Sendable {
     public static let shared = ImageOptimizerService()
+    public static let maxRawByteSize: Int = 30 * 1024 * 1024 // 30 MB max payload protection
 
     private init() {}
 
@@ -13,6 +14,11 @@ public final class ImageOptimizerService: Sendable {
     ///   - compressionQuality: JPEG compression level (0.80 - 0.88 recommended for high fidelity).
     /// - Returns: Optimized, downsampled Data.
     public func downsample(imageData: Data, maxDimension: CGFloat = 1920, compressionQuality: CGFloat = 0.85) -> Data? {
+        // Punto 16: Límite estricto de tamaño de archivo (máx 30 MB)
+        guard imageData.count <= Self.maxRawByteSize else {
+            return nil
+        }
+
         let imageSourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
         guard let imageSource = CGImageSourceCreateWithData(imageData as CFData, imageSourceOptions) else {
             return nil
@@ -35,6 +41,11 @@ public final class ImageOptimizerService: Sendable {
 
     /// Optimized downsampling specifically for circular coins preserving PNG alpha transparency
     public func downsampleCoinPNG(imageData: Data, maxDimension: CGFloat = 600) -> Data? {
+        // Punto 16: Límite estricto de tamaño de archivo (máx 30 MB)
+        guard imageData.count <= Self.maxRawByteSize else {
+            return nil
+        }
+
         let imageSourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
         guard let imageSource = CGImageSourceCreateWithData(imageData as CFData, imageSourceOptions) else {
             return imageData
