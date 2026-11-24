@@ -14,7 +14,7 @@ An elegant, offline-first native iOS application designed for couples to chronic
 
 | Expediciones & Crónica | Gabinete Numismático 3D |
 | :---: | :---: |
-| <img src="assets/screenshots/home_preview.png" width="320" alt="Expediciones & Crónica" /> | <img src="assets/screenshots/cabinet_preview.png" width="320" alt="Gabinete Numismático" /> |
+| <img src="assets/screenshots/expeditions_preview.png" width="320" alt="Expediciones & Crónica" /> | <img src="assets/screenshots/cabinet_preview.png" width="320" alt="Gabinete Numismático" /> |
 
 ---
 
