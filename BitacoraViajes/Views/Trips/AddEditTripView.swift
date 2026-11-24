@@ -59,20 +59,19 @@ public struct AddEditTripView: View {
                 }
 
                 Section("Foto de Portada") {
+                    if let data = coverImageData, let uiImage = UIImage(data: data) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(height: 140)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
                     PhotosPicker(selection: $selectedPhotoItem, matching: .images) {
-                        if let data = coverImageData, let uiImage = UIImage(data: data) {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(height: 140)
-                                .clipShape(RoundedRectangle(cornerRadius: 12))
-                        } else {
-                            HStack {
-                                Image(systemName: "photo.badge.plus")
-                                Text("Seleccionar foto de portada")
-                            }
-                            .foregroundStyle(Color.amberAccent)
+                        HStack {
+                            Image(systemName: "photo.badge.plus")
+                            Text("Seleccionar foto de portada")
                         }
+                        .foregroundStyle(Color.amberAccent)
                     }
                     .onChange(of: selectedPhotoItem) { _, newItem in
                         Task {

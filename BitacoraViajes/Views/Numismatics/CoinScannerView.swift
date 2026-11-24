@@ -80,7 +80,7 @@ public struct CoinScannerView: View {
                 // Actions
                 VStack(spacing: 12) {
                     PhotosPicker(selection: $selectedPhotoItem, matching: .images) {
-                        Label(rawImage == nil ? "Seleccionar Foto de la Moneda" : "Cambiar Fotografía", systemImage: "photo.on.rectangle.angled")
+                        Label("Seleccionar Foto de la Moneda", systemImage: "photo.on.rectangle.angled")
                             .font(.headline)
                             .frame(maxWidth: .infinity)
                             .padding()
@@ -115,7 +115,7 @@ public struct CoinScannerView: View {
                     Button("Cancelar") { dismiss() }
                 }
             }
-            .onChange(of: selectedPhotoItem) { newItem in
+            .onChange(of: selectedPhotoItem) { _, newItem in
                 guard let newItem else { return }
                 Task {
                     isProcessing = true

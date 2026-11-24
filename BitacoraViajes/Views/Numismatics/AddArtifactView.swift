@@ -98,19 +98,18 @@ public struct AddArtifactView: View {
                     }
 
                     // Front Photo
-                    PhotosPicker(selection: $frontPhotoItem, matching: .images) {
-                        HStack {
-                            Label("Foto Anverso", systemImage: "circle.circle")
-                            Spacer()
-                            if let data = imageFrontData, let img = UIImage(data: data) {
-                                Image(uiImage: img)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 44, height: 44)
-                                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                            } else {
-                                Text("Añadir").foregroundStyle(Color.amberAccent)
-                            }
+                    HStack {
+                        Label("Foto Anverso", systemImage: "circle.circle")
+                        Spacer()
+                        if let data = imageFrontData, let img = UIImage(data: data) {
+                            Image(uiImage: img)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 44, height: 44)
+                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                        }
+                        PhotosPicker(selection: $frontPhotoItem, matching: .images) {
+                            Text("Seleccionar")
                         }
                     }
                     .onChange(of: frontPhotoItem) { _, newItem in
@@ -123,19 +122,18 @@ public struct AddArtifactView: View {
                     }
 
                     // Back Photo
-                    PhotosPicker(selection: $backPhotoItem, matching: .images) {
-                        HStack {
-                            Label("Foto Reverso", systemImage: "arrow.triangle.2.circlepath")
-                            Spacer()
-                            if let data = imageBackData, let img = UIImage(data: data) {
-                                Image(uiImage: img)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 44, height: 44)
-                                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                            } else {
-                                Text("Añadir").foregroundStyle(.secondary)
-                            }
+                    HStack {
+                        Label("Foto Reverso", systemImage: "arrow.triangle.2.circlepath")
+                        Spacer()
+                        if let data = imageBackData, let img = UIImage(data: data) {
+                            Image(uiImage: img)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 44, height: 44)
+                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                        }
+                        PhotosPicker(selection: $backPhotoItem, matching: .images) {
+                            Text("Seleccionar")
                         }
                     }
                     .onChange(of: backPhotoItem) { _, newItem in
