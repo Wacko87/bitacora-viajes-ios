@@ -78,8 +78,10 @@ bitacora-viajes-ios/
 │   ├── Views/                        # Modular SwiftUI screens and components
 │   └── Widgets/                      # WidgetKit timeline providers and views
 ├── BitacoraViajesTests/              # Swift Testing suite (CountryCatalog, Expenses, Keychain)
+├── Docs/                             # Architecture, App Store readiness & documentation
 ├── assets/screenshots/               # Visual previews and assets
-├── project.yml                       # Declarative project specification (XcodeGen)
+├── project.yml                       # Declarative project specification (XcodeGen single source of truth)
+├── PRIVACY.md                        # On-device privacy policy & App Store compliance
 └── .github/workflows/ci.yml          # Automated CI pipeline
 ```
 
