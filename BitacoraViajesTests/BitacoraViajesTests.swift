@@ -88,12 +88,13 @@ struct BitacoraViajesTests {
     }
 
     @Test func testAPISyncRateLimiting() async {
-        // First connection with HTTPS (cooldown starts)
-        _ = await APISyncService.shared.testConnection(url: "https://127.0.0.1:8443", pin: "test")
+        // First check with rate limiter (cooldown starts)
+        let firstCheck = await APISyncService.shared.checkRateLimit()
+        #expect(firstCheck.allowed == true)
         
         // Immediate second attempt within 2 seconds (must be throttled)
-        let throttledResult = await APISyncService.shared.testConnection(url: "https://127.0.0.1:8443", pin: "test")
-        #expect(throttledResult.success == false)
+        let throttledResult = await APISyncService.shared.checkRateLimit()
+        #expect(throttledResult.allowed == false)
         #expect(throttledResult.message.contains("Límite de intentos"))
     }
 

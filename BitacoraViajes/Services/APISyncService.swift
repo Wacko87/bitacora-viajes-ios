@@ -51,6 +51,16 @@ public actor APISyncService {
         }
     }
 
+    // Punto 19: Rate Limiting / Throttling (cooldown de 2 segundos entre intentos de conexión)
+    public func checkRateLimit() -> (allowed: Bool, message: String) {
+        let now = Date()
+        if let last = lastConnectionAttempt, now.timeIntervalSince(last) < 2.0 {
+            return (false, "Límite de intentos: Por seguridad, espera 2 segundos antes de volver a probar la conexión.")
+        }
+        lastConnectionAttempt = now
+        return (true, "")
+    }
+
     public func testConnection(url: String, pin: String) async -> (success: Bool, message: String) {
         // Punto 18: HTTPS obligatorio (validación de esquema seguro antes de procesar)
         let trimmed = url.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -60,12 +70,10 @@ public actor APISyncService {
             return (false, "Seguridad HTTPS obligatoria: Solo se admiten conexiones seguras que comiencen con 'https://'")
         }
 
-        // Punto 19: Rate Limiting / Throttling (cooldown de 2 segundos entre intentos de conexión)
-        let now = Date()
-        if let last = lastConnectionAttempt, now.timeIntervalSince(last) < 2.0 {
-            return (false, "Límite de intentos: Por seguridad, espera 2 segundos antes de volver a probar la conexión.")
+        let rateCheck = checkRateLimit()
+        if !rateCheck.allowed {
+            return (false, rateCheck.message)
         }
-        lastConnectionAttempt = now
 
         let pingURL = server.appendingPathComponent("api/auth/status")
         var request = URLRequest(url: pingURL)
